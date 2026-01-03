@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز اضواء الساير للعلاج الطبيعي والمساند الطبية</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e40af">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+        }
+        
+        body {
+            font-family: 'Noto Sans Arabic', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+            background: var(--card);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            flex: 1;
+            min-width: 70px;
+            padding: 0.5rem 0.25rem;
+            border: none;
+            background: transparent;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .card {
+            background: var(--card);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.375rem;
+            color: var(--text);
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+            transition: border-color 0.2s;
+            direction: rtl;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-light);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .btn-block {
+            width: 100%;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .patient-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .patient-card {
+            background: var(--card);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-right: 4px solid var(--primary);
+        }
+        
+        .patient-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .patient-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .patient-info span {
+            display: flex;
+            gap: 0.25rem;
+        }
+        
+        .patient-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        
+        .patient-actions .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 0.25rem;
+            background: var(--primary);
+            color: white;
+        }
+        
+        .badge-success {
+            background: var(--success);
+        }
+        
+        .badge-warning {
+            background: var(--warning);
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .summary-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .summary-card p {
+            opacity: 0.9;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-item {
+            background: var(--card);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .summary-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .summary-item p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .summary-item.success h3 {
+            color: var(--success);
+        }
+        
+        .summary-item.warning h3 {
+            color: var(--warning);
+        }
+        
+        .summary-item.danger h3 {
+            color: var(--danger);
+        }
+        
+        .search-box {
+            margin-bottom: 1rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--card);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        
+        .total-box {
+            background: linear-gradient(135deg, var(--success) 0%, #16a34a 100%);
+            color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .total-box h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            z-index: 2000;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(1rem);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .offline-badge {
+            position: fixed;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: var(--warning);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            z-index: 200;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        .detail-value {
+            font-weight: 600;
+        }
+        
+        .period-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .period-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 0.5rem;
+            border: 2px solid var(--border);
+            background: var(--card);
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        
+        .period-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .report-section {
+            background: var(--card);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .report-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        
+        .report-item {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 0.375rem;
+        }
+        
+        .report-item h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .report-item p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .report-item.success h4 { color: var(--success); }
+        .report-item.warning h4 { color: var(--warning); }
+        .report-item.danger h4 { color: var(--danger); }
+        
+        .share-text {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            direction: rtl;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .report-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Floating Share Button */
+        .fab-container {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 500;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .fab-main {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.2s;
+        }
+        
+        .fab-main:hover {
+            transform: scale(1.1);
+            background: var(--primary-light);
+        }
+        
+        .fab-main.active {
+            transform: rotate(45deg);
+            background: var(--danger);
+        }
+        
+        .fab-options {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .fab-options.show {
+            display: flex;
+        }
+        
+        .fab-option {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            color: white;
+        }
+        
+        .fab-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .fab-whatsapp {
+            background: #25D366;
+        }
+        
+        .fab-telegram {
+            background: #0088cc;
+        }
+        
+        .fab-copy {
+            background: var(--secondary);
+        }
+        
+        .fab-download {
+            background: var(--warning);
+        }
+        
+        .fab-label {
+            position: absolute;
+            left: 60px;
+            background: var(--text);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        
+        .fab-option:hover .fab-label {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-badge">نسخة أوفلاين</div>
+    
+    <header class="header">
+        <h1>مركز اضواء الساير للعلاج الطبيعي والمساند الطبية</h1>
+        <p>نظام إدارة المرضى - نسخة أوفلاين</p>
+    </header>
+    
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('form')">تسجيل</button>
+            <button class="tab" onclick="showTab('list')">المرضى</button>
+            <button class="tab" onclick="showTab('reports')">التقارير</button>
+            <button class="tab" onclick="showTab('settings')">الإعدادات</button>
+        </div>
+        
+        <!-- تسجيل مريض -->
+        <div id="form-tab">
+            <form id="patientForm">
+                <!-- البيانات الشخصية -->
+                <div class="card">
+                    <h2 class="card-title">البيانات الشخصية</h2>
+                    <div class="form-group">
+                        <label class="form-label">اسم المريض *</label>
+                        <input type="text" class="form-input" id="patientName" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">العمر</label>
+                            <input type="number" class="form-input" id="age" min="0" max="150">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الهاتف</label>
+                            <input type="tel" class="form-input" id="phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">السكن</label>
+                        <input type="text" class="form-input" id="residence">
+                    </div>
+                </div>
+                
+                <!-- البيانات الطبية -->
+                <div class="card">
+                    <h2 class="card-title">البيانات الطبية</h2>
+                    <div class="form-group">
+                        <label class="form-label">اسم الطبيب</label>
+                        <input type="text" class="form-input" id="doctorName">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">التشخيص</label>
+                        <textarea class="form-textarea" id="diagnosis"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">طلب الطبيب</label>
+                        <textarea class="form-textarea" id="doctorRequest"></textarea>
+                    </div>
+                </div>
+                
+                <!-- العملية الجراحية -->
+                <div class="card">
+                    <h2 class="card-title">العملية الجراحية</h2>
+                    <div class="form-group">
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="hasSurgery" onchange="toggleSurgery()">
+                            <span>يوجد عملية جراحية</span>
+                        </label>
+                    </div>
+                    <div id="surgeryDetails" class="hidden">
+                        <div class="form-group">
+                            <label class="form-label">نوع العملية</label>
+                            <input type="text" class="form-input" id="surgeryType">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الرعاية الطبية -->
+                <div class="card">
+                    <h2 class="card-title">الرعاية الطبية</h2>
+                    <div class="form-group">
+                        <label class="form-label">نوع الرعاية</label>
+                        <select class="form-select" id="careType" onchange="toggleCareDetails()">
+                            <option value="">اختر نوع الرعاية</option>
+                            <option value="تمارين منزلية">تمارين منزلية</option>
+                            <option value="جلسات">جلسات علاج طبيعي</option>
+                        </select>
+                    </div>
+                    <div id="sessionDetails" class="hidden">
+                        <div class="form-group">
+                            <label class="form-label">نوع الجلسات</label>
+                            <select class="form-select" id="sessionType">
+                                <option value="">اختر نوع الجلسات</option>
+                                <option value="أجهزة">أجهزة</option>
+                                <option value="تمارين">تمارين</option>
+                                <option value="أجهزة وتمارين">أجهزة وتمارين</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">عدد الجلسات</label>
+                                <input type="number" class="form-input" id="sessionCount" min="0" onchange="calculateTotal()">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">سعر الجلسة (د.ك)</label>
+                                <input type="number" class="form-input" id="sessionPrice" min="0" step="0.5" onchange="calculateTotal()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- المساند الطبية -->
+                <div class="card">
+                    <h2 class="card-title">المساند الطبية</h2>
+                    <div class="form-group">
+                        <label class="form-label">نوع المسند</label>
+                        <input type="text" class="form-input" id="aidType">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">سعر المسند (د.ك)</label>
+                        <input type="number" class="form-input" id="aidPrice" min="0" step="0.5" onchange="calculateTotal()">
+                    </div>
+                </div>
+                
+                <!-- خدمات أخرى -->
+                <div class="card">
+                    <h2 class="card-title">خدمات أخرى</h2>
+                    <div class="form-group">
+                        <label class="form-label">وصف الخدمة</label>
+                        <input type="text" class="form-input" id="otherServices">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">السعر (د.ك)</label>
+                        <input type="number" class="form-input" id="otherServicesPrice" min="0" step="0.5" onchange="calculateTotal()">
+                    </div>
+                </div>
+                
+                <!-- النظام الغذائي -->
+                <div class="card">
+                    <h2 class="card-title">النظام الغذائي</h2>
+                    <div class="form-group">
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="hasDiet" onchange="toggleDiet()">
+                            <span>يوجد نظام غذائي</span>
+                        </label>
+                    </div>
+                    <div id="dietDetails" class="hidden">
+                        <div class="form-group">
+                            <label class="form-label">تفاصيل النظام الغذائي</label>
+                            <textarea class="form-textarea" id="dietPlan"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- المبالغ -->
+                <div class="card">
+                    <h2 class="card-title">المبالغ المالية</h2>
+                    <div class="form-group">
+                        <label class="form-label">المبلغ المستلم (د.ك)</label>
+                        <input type="number" class="form-input" id="totalReceivedInput" min="0" step="0.5">
+                    </div>
+                    <div class="total-box">
+                        <p>المبلغ الإجمالي</p>
+                        <h3 id="totalAmount">0.000 د.ك</h3>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary btn-block">حفظ المريض</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">مسح النموذج</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- قائمة المرضى -->
+        <div id="list-tab" class="hidden">
+            <div class="search-box">
+                <input type="text" class="form-input" id="searchInput" placeholder="البحث عن مريض..." oninput="searchPatients()">
+            </div>
+            <div id="patientList" class="patient-list"></div>
+        </div>
+        
+        <!-- التقارير والمشاركة -->
+        <div id="reports-tab" class="hidden">
+            <div class="period-selector">
+                <button class="period-btn active" onclick="selectPeriod('today', this)">اليوم</button>
+                <button class="period-btn" onclick="selectPeriod('week', this)">الأسبوع</button>
+                <button class="period-btn" onclick="selectPeriod('month', this)">الشهر</button>
+                <button class="period-btn" onclick="selectPeriod('all', this)">الكل</button>
+            </div>
+            
+            <div class="summary-card">
+                <p id="periodLabel">تقرير اليوم</p>
+                <h2 id="periodDate"></h2>
+            </div>
+            
+            <!-- إحصائيات الحالات -->
+            <div class="report-section">
+                <div class="report-title">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    الحالات
+                </div>
+                <div class="report-grid">
+                    <div class="report-item">
+                        <h4 id="reportCases">0</h4>
+                        <p>عدد الحالات</p>
+                    </div>
+                    <div class="report-item">
+                        <h4 id="reportSessions">0</h4>
+                        <p>جلسات علاج</p>
+                    </div>
+                    <div class="report-item">
+                        <h4 id="reportAids">0</h4>
+                        <p>مساند طبية</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- إحصائيات المالية -->
+            <div class="report-section">
+                <div class="report-title">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    المالية
+                </div>
+                <div class="report-grid">
+                    <div class="report-item">
+                        <h4 id="reportTotal">0</h4>
+                        <p>المبلغ الإجمالي</p>
+                    </div>
+                    <div class="report-item success">
+                        <h4 id="reportReceived">0</h4>
+                        <p>المبلغ المستلم</p>
+                    </div>
+                    <div class="report-item danger">
+                        <h4 id="reportRemaining">0</h4>
+                        <p>المبلغ المتبقي</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- نص المشاركة -->
+            <div class="card">
+                <h2 class="card-title">مشاركة التقرير</h2>
+                <div class="share-text" id="shareText"></div>
+                <div class="btn-group" style="flex-direction: column;">
+                    <button class="btn btn-primary btn-block" onclick="copyReport()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                        </svg>
+                        نسخ التقرير
+                    </button>
+                    <button class="btn btn-success btn-block" onclick="shareWhatsApp()">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        مشاركة واتساب
+                    </button>
+                    <button class="btn btn-block" style="background: #0088cc; color: white;" onclick="shareTelegram()">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        مشاركة تليغرام
+                    </button>
+                    <button class="btn btn-secondary btn-block" onclick="downloadReport()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        تنزيل كملف نصي
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- الإعدادات -->
+        <div id="settings-tab" class="hidden">
+            <div class="summary-card">
+                <p>إجمالي المرضى المسجلين</p>
+                <h2 id="totalPatients">0</h2>
+            </div>
+            
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h3 id="allRevenue">0</h3>
+                    <p>إجمالي الإيرادات (د.ك)</p>
+                </div>
+                <div class="summary-item success">
+                    <h3 id="allReceived">0</h3>
+                    <p>المبالغ المستلمة (د.ك)</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2 class="card-title">إدارة البيانات</h2>
+                <div class="btn-group" style="flex-direction: column;">
+                    <button class="btn btn-primary btn-block" onclick="exportData()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        تصدير البيانات (JSON)
+                    </button>
+                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('importFile').click()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                        </svg>
+                        استيراد البيانات
+                    </button>
+                    <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display:none">
+                    <button class="btn btn-danger btn-block" onclick="clearAllData()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        حذف جميع البيانات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Share Button -->
+    <div class="fab-container">
+        <button class="fab-main" onclick="toggleFab()" id="fabMain">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+            </svg>
+        </button>
+        <div class="fab-options" id="fabOptions">
+            <button class="fab-option fab-whatsapp" onclick="quickShareWhatsApp()">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                <span class="fab-label">واتساب</span>
+            </button>
+            <button class="fab-option fab-telegram" onclick="quickShareTelegram()">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                <span class="fab-label">تليغرام</span>
+            </button>
+            <button class="fab-option fab-copy" onclick="quickCopy()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                </svg>
+                <span class="fab-label">نسخ</span>
+            </button>
+            <button class="fab-option fab-download" onclick="quickDownload()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                <span class="fab-label">تنزيل</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Modal تفاصيل المريض -->
+    <div class="modal" id="patientModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تفاصيل المريض</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="patientDetails"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Database
+        let patients = JSON.parse(localStorage.getItem('alsayer_patients') || '[]');
+        let editingId = null;
+        let currentPeriod = 'today';
+        
+        // Save to localStorage
+        function savePatients() {
+            localStorage.setItem('alsayer_patients', JSON.stringify(patients));
+        }
+        
+        // Generate unique ID
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        // Tab navigation
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('[id$="-tab"]').forEach(t => t.classList.add('hidden'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+            
+            if (tabName === 'list') renderPatientList();
+            if (tabName === 'reports') updateReports();
+            if (tabName === 'settings') updateSettings();
+        }
+        
+        // Toggle sections
+        function toggleSurgery() {
+            document.getElementById('surgeryDetails').classList.toggle('hidden', !document.getElementById('hasSurgery').checked);
+        }
+        
+        function toggleCareDetails() {
+            const careType = document.getElementById('careType').value;
+            document.getElementById('sessionDetails').classList.toggle('hidden', careType !== 'جلسات');
+        }
+        
+        function toggleDiet() {
+            document.getElementById('dietDetails').classList.toggle('hidden', !document.getElementById('hasDiet').checked);
+        }
+        
+        // Calculate total
+        function calculateTotal() {
+            let total = 0;
+            const sessionCount = parseFloat(document.getElementById('sessionCount').value) || 0;
+            const sessionPrice = parseFloat(document.getElementById('sessionPrice').value) || 0;
+            const aidPrice = parseFloat(document.getElementById('aidPrice').value) || 0;
+            const otherPrice = parseFloat(document.getElementById('otherServicesPrice').value) || 0;
+            
+            total = (sessionCount * sessionPrice) + aidPrice + otherPrice;
+            document.getElementById('totalAmount').textContent = total.toFixed(3) + ' د.ك';
+        }
+        
+        // Form submission
+        document.getElementById('patientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const patient = {
+                id: editingId || generateId(),
+                patientName: document.getElementById('patientName').value,
+                age: document.getElementById('age').value,
+                phone: document.getElementById('phone').value,
+                residence: document.getElementById('residence').value,
+                doctorName: document.getElementById('doctorName').value,
+                diagnosis: document.getElementById('diagnosis').value,
+                doctorRequest: document.getElementById('doctorRequest').value,
+                hasSurgery: document.getElementById('hasSurgery').checked,
+                surgeryType: document.getElementById('surgeryType').value,
+                careType: document.getElementById('careType').value,
+                sessionType: document.getElementById('sessionType').value,
+                sessionCount: parseFloat(document.getElementById('sessionCount').value) || 0,
+                sessionPrice: parseFloat(document.getElementById('sessionPrice').value) || 0,
+                aidType: document.getElementById('aidType').value,
+                aidPrice: parseFloat(document.getElementById('aidPrice').value) || 0,
+                otherServices: document.getElementById('otherServices').value,
+                otherServicesPrice: parseFloat(document.getElementById('otherServicesPrice').value) || 0,
+                hasDiet: document.getElementById('hasDiet').checked,
+                dietPlan: document.getElementById('dietPlan').value,
+                totalReceived: parseFloat(document.getElementById('totalReceivedInput').value) || 0,
+                totalAmount: (parseFloat(document.getElementById('sessionCount').value) || 0) * 
+                             (parseFloat(document.getElementById('sessionPrice').value) || 0) +
+                             (parseFloat(document.getElementById('aidPrice').value) || 0) +
+                             (parseFloat(document.getElementById('otherServicesPrice').value) || 0),
+                createdAt: editingId ? patients.find(p => p.id === editingId)?.createdAt : new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            if (editingId) {
+                const index = patients.findIndex(p => p.id === editingId);
+                patients[index] = patient;
+                showToast('تم تحديث بيانات المريض');
+            } else {
+                patients.unshift(patient);
+                showToast('تم تسجيل المريض بنجاح');
+            }
+            
+            savePatients();
+            resetForm();
+        });
+        
+        // Reset form
+        function resetForm() {
+            document.getElementById('patientForm').reset();
+            document.getElementById('surgeryDetails').classList.add('hidden');
+            document.getElementById('sessionDetails').classList.add('hidden');
+            document.getElementById('dietDetails').classList.add('hidden');
+            document.getElementById('totalAmount').textContent = '0.000 د.ك';
+            editingId = null;
+        }
+        
+        // Render patient list
+        function renderPatientList(filteredPatients = null) {
+            const list = document.getElementById('patientList');
+            const data = filteredPatients || patients;
+            
+            if (data.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p>لا يوجد مرضى مسجلين</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = data.map(p => `
+                <div class="patient-card">
+                    <h3>${p.patientName}</h3>
+                    <div class="patient-info">
+                        <span><strong>العمر:</strong> ${p.age || '-'}</span>
+                        <span><strong>الهاتف:</strong> ${p.phone || '-'}</span>
+                        <span><strong>الطبيب:</strong> ${p.doctorName || '-'}</span>
+                        <span><strong>المبلغ:</strong> ${p.totalAmount?.toFixed(3) || 0} د.ك</span>
+                    </div>
+                    <div class="patient-actions">
+                        <button class="btn btn-primary" onclick="viewPatient('${p.id}')">عرض</button>
+                        <button class="btn btn-secondary" onclick="editPatient('${p.id}')">تعديل</button>
+                        <button class="btn btn-danger" onclick="deletePatient('${p.id}')">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Search patients
+        function searchPatients() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = patients.filter(p => 
+                p.patientName?.toLowerCase().includes(query) ||
+                p.phone?.includes(query) ||
+                p.doctorName?.toLowerCase().includes(query)
+            );
+            renderPatientList(filtered);
+        }
+        
+        // View patient details
+        function viewPatient(id) {
+            const p = patients.find(patient => patient.id === id);
+            if (!p) return;
+            
+            const details = document.getElementById('patientDetails');
+            details.innerHTML = `
+                <div class="detail-row"><span class="detail-label">اسم المريض</span><span class="detail-value">${p.patientName}</span></div>
+                <div class="detail-row"><span class="detail-label">العمر</span><span class="detail-value">${p.age || '-'}</span></div>
+                <div class="detail-row"><span class="detail-label">الهاتف</span><span class="detail-value">${p.phone || '-'}</span></div>
+                <div class="detail-row"><span class="detail-label">السكن</span><span class="detail-value">${p.residence || '-'}</span></div>
+                <div class="detail-row"><span class="detail-label">الطبيب</span><span class="detail-value">${p.doctorName || '-'}</span></div>
+                <div class="detail-row"><span class="detail-label">التشخيص</span><span class="detail-value">${p.diagnosis || '-'}</span></div>
+                <div class="detail-row"><span class="detail-label">طلب الطبيب</span><span class="detail-value">${p.doctorRequest || '-'}</span></div>
+                ${p.hasSurgery ? `<div class="detail-row"><span class="detail-label">العملية</span><span class="detail-value">${p.surgeryType}</span></div>` : ''}
+                <div class="detail-row"><span class="detail-label">نوع الرعاية</span><span class="detail-value">${p.careType || '-'}</span></div>
+                ${p.careType === 'جلسات' ? `
+                    <div class="detail-row"><span class="detail-label">نوع الجلسات</span><span class="detail-value">${p.sessionType}</span></div>
+                    <div class="detail-row"><span class="detail-label">عدد الجلسات</span><span class="detail-value">${p.sessionCount}</span></div>
+                    <div class="detail-row"><span class="detail-label">سعر الجلسة</span><span class="detail-value">${p.sessionPrice} د.ك</span></div>
+                ` : ''}
+                ${p.aidType ? `<div class="detail-row"><span class="detail-label">المسند الطبي</span><span class="detail-value">${p.aidType} (${p.aidPrice} د.ك)</span></div>` : ''}
+                ${p.otherServices ? `<div class="detail-row"><span class="detail-label">خدمات أخرى</span><span class="detail-value">${p.otherServices} (${p.otherServicesPrice} د.ك)</span></div>` : ''}
+                ${p.hasDiet ? `<div class="detail-row"><span class="detail-label">النظام الغذائي</span><span class="detail-value">${p.dietPlan}</span></div>` : ''}
+                <div class="detail-row"><span class="detail-label">المبلغ الإجمالي</span><span class="detail-value" style="color: var(--primary); font-size: 1.25rem;">${p.totalAmount?.toFixed(3)} د.ك</span></div>
+                <div class="detail-row"><span class="detail-label">المبلغ المستلم</span><span class="detail-value" style="color: var(--success);">${p.totalReceived?.toFixed(3)} د.ك</span></div>
+                <div class="detail-row"><span class="detail-label">تاريخ التسجيل</span><span class="detail-value">${new Date(p.createdAt).toLocaleString('ar-KW')}</span></div>
+            `;
+            
+            document.getElementById('patientModal').classList.add('active');
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('patientModal').classList.remove('active');
+        }
+        
+        // Edit patient
+        function editPatient(id) {
+            const p = patients.find(patient => patient.id === id);
+            if (!p) return;
+            
+            editingId = id;
+            
+            document.getElementById('patientName').value = p.patientName || '';
+            document.getElementById('age').value = p.age || '';
+            document.getElementById('phone').value = p.phone || '';
+            document.getElementById('residence').value = p.residence || '';
+            document.getElementById('doctorName').value = p.doctorName || '';
+            document.getElementById('diagnosis').value = p.diagnosis || '';
+            document.getElementById('doctorRequest').value = p.doctorRequest || '';
+            document.getElementById('hasSurgery').checked = p.hasSurgery || false;
+            document.getElementById('surgeryType').value = p.surgeryType || '';
+            document.getElementById('careType').value = p.careType || '';
+            document.getElementById('sessionType').value = p.sessionType || '';
+            document.getElementById('sessionCount').value = p.sessionCount || '';
+            document.getElementById('sessionPrice').value = p.sessionPrice || '';
+            document.getElementById('aidType').value = p.aidType || '';
+            document.getElementById('aidPrice').value = p.aidPrice || '';
+            document.getElementById('otherServices').value = p.otherServices || '';
+            document.getElementById('otherServicesPrice').value = p.otherServicesPrice || '';
+            document.getElementById('hasDiet').checked = p.hasDiet || false;
+            document.getElementById('dietPlan').value = p.dietPlan || '';
+            document.getElementById('totalReceivedInput').value = p.totalReceived || '';
+            
+            toggleSurgery();
+            toggleCareDetails();
+            toggleDiet();
+            calculateTotal();
+            
+            showTab('form');
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab')[0].classList.add('active');
+            
+            window.scrollTo(0, 0);
+            showToast('جاري تعديل بيانات المريض');
+        }
+        
+        // Delete patient
+        function deletePatient(id) {
+            if (confirm('هل أنت متأكد من حذف هذا المريض؟')) {
+                patients = patients.filter(p => p.id !== id);
+                savePatients();
+                renderPatientList();
+                showToast('تم حذف المريض');
+            }
+        }
+        
+        // Get date ranges
+        function getDateRange(period) {
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            switch(period) {
+                case 'today':
+                    return { start: today, end: new Date(today.getTime() + 24*60*60*1000) };
+                case 'week':
+                    const weekStart = new Date(today);
+                    weekStart.setDate(today.getDate() - today.getDay());
+                    return { start: weekStart, end: new Date(weekStart.getTime() + 7*24*60*60*1000) };
+                case 'month':
+                    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                    const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+                    return { start: monthStart, end: monthEnd };
+                case 'all':
+                default:
+                    return { start: new Date(0), end: new Date(now.getTime() + 24*60*60*1000) };
+            }
+        }
+        
+        // Filter patients by period
+        function filterByPeriod(period) {
+            const range = getDateRange(period);
+            return patients.filter(p => {
+                const date = new Date(p.createdAt);
+                return date >= range.start && date < range.end;
+            });
+        }
+        
+        // Select period
+        function selectPeriod(period, btn) {
+            currentPeriod = period;
+            document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateReports();
+        }
+        
+        // Update reports
+        function updateReports() {
+            const filtered = filterByPeriod(currentPeriod);
+            const range = getDateRange(currentPeriod);
+            
+            // Update period label
+            const labels = {
+                'today': 'تقرير اليوم',
+                'week': 'تقرير الأسبوع',
+                'month': 'تقرير الشهر',
+                'all': 'تقرير شامل'
+            };
+            document.getElementById('periodLabel').textContent = labels[currentPeriod];
+            
+            // Update date
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            if (currentPeriod === 'today') {
+                document.getElementById('periodDate').textContent = new Date().toLocaleDateString('ar-KW', dateOptions);
+            } else if (currentPeriod === 'week') {
+                document.getElementById('periodDate').textContent = `${range.start.toLocaleDateString('ar-KW')} - ${new Date(range.end.getTime() - 1).toLocaleDateString('ar-KW')}`;
+            } else if (currentPeriod === 'month') {
+                document.getElementById('periodDate').textContent = new Date().toLocaleDateString('ar-KW', { month: 'long', year: 'numeric' });
+            } else {
+                document.getElementById('periodDate').textContent = 'جميع الفترات';
+            }
+            
+            // Calculate stats
+            const totalCases = filtered.length;
+            const sessionCases = filtered.filter(p => p.careType === 'جلسات').length;
+            const aidCases = filtered.filter(p => p.aidType).length;
+            const totalAmount = filtered.reduce((sum, p) => sum + (p.totalAmount || 0), 0);
+            const totalReceived = filtered.reduce((sum, p) => sum + (p.totalReceived || 0), 0);
+            const remaining = totalAmount - totalReceived;
+            
+            // Update UI
+            document.getElementById('reportCases').textContent = totalCases;
+            document.getElementById('reportSessions').textContent = sessionCases;
+            document.getElementById('reportAids').textContent = aidCases;
+            document.getElementById('reportTotal').textContent = totalAmount.toFixed(3);
+            document.getElementById('reportReceived').textContent = totalReceived.toFixed(3);
+            document.getElementById('reportRemaining').textContent = remaining.toFixed(3);
+            
+            // Generate share text
+            const shareText = generateShareText(currentPeriod, filtered, totalAmount, totalReceived, remaining);
+            document.getElementById('shareText').textContent = shareText;
+        }
+        
+        // Generate share text
+        function generateShareText(period, filtered, total, received, remaining) {
+            const labels = {
+                'today': 'اليوم',
+                'week': 'هذا الأسبوع',
+                'month': 'هذا الشهر',
+                'all': 'الإجمالي'
+            };
+            
+            const sessionCases = filtered.filter(p => p.careType === 'جلسات').length;
+            const aidCases = filtered.filter(p => p.aidType).length;
+            
+            let text = `مركز اضواء الساير للعلاج الطبيعي والمساند الطبية\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `تقرير ${labels[period]}\n`;
+            text += `${new Date().toLocaleDateString('ar-KW')}\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+            
+            text += `الحالات:\n`;
+            text += `  عدد المرضى: ${filtered.length}\n`;
+            text += `  جلسات علاج: ${sessionCases}\n`;
+            text += `  مساند طبية: ${aidCases}\n\n`;
+            
+            text += `المالية:\n`;
+            text += `  المبلغ الإجمالي: ${total.toFixed(3)} د.ك\n`;
+            text += `  المبلغ المستلم: ${received.toFixed(3)} د.ك\n`;
+            text += `  المبلغ المتبقي: ${remaining.toFixed(3)} د.ك\n\n`;
+            
+            text += `━━━━━━━━━━━━━━━━━━━━`;
+            
+            return text;
+        }
+        
+        // Copy report
+        function copyReport() {
+            const text = document.getElementById('shareText').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ التقرير');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('تم نسخ التقرير');
+            });
+        }
+        
+        // Share via WhatsApp
+        function shareWhatsApp() {
+            const text = document.getElementById('shareText').textContent;
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/?text=${encoded}`, '_blank');
+        }
+        
+        // Share via Telegram
+        function shareTelegram() {
+            const text = document.getElementById('shareText').textContent;
+            const encoded = encodeURIComponent(text);
+            window.open(`https://t.me/share/url?text=${encoded}`, '_blank');
+        }
+        
+        // Download report as text file
+        function downloadReport() {
+            const text = document.getElementById('shareText').textContent;
+            const labels = {
+                'today': 'اليوم',
+                'week': 'الاسبوع',
+                'month': 'الشهر',
+                'all': 'الكل'
+            };
+            const filename = `تقرير_${labels[currentPeriod]}_${new Date().toISOString().split('T')[0]}.txt`;
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('تم تنزيل التقرير');
+        }
+        
+        // Floating Action Button Toggle
+        function toggleFab() {
+            const fab = document.getElementById('fabMain');
+            const options = document.getElementById('fabOptions');
+            fab.classList.toggle('active');
+            options.classList.toggle('show');
+        }
+        
+        // Generate quick report text for floating button
+        function getQuickReportText() {
+            const today = new Date().toDateString();
+            const todayPatients = patients.filter(p => new Date(p.createdAt).toDateString() === today);
+            const totalAmount = todayPatients.reduce((sum, p) => sum + (p.totalAmount || 0), 0);
+            const totalReceived = todayPatients.reduce((sum, p) => sum + (p.totalReceived || 0), 0);
+            const remaining = totalAmount - totalReceived;
+            const sessionCases = todayPatients.filter(p => p.careType === 'جلسات').length;
+            const aidCases = todayPatients.filter(p => p.aidType).length;
+            
+            let text = `مركز اضواء الساير للعلاج الطبيعي والمساند الطبية\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━\n`;
+            text += `تقرير اليوم\n`;
+            text += `${new Date().toLocaleDateString('ar-KW')}\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━\n\n`;
+            text += `الحالات:\n`;
+            text += `  عدد المرضى: ${todayPatients.length}\n`;
+            text += `  جلسات علاج: ${sessionCases}\n`;
+            text += `  مساند طبية: ${aidCases}\n\n`;
+            text += `المالية:\n`;
+            text += `  المبلغ الإجمالي: ${totalAmount.toFixed(3)} د.ك\n`;
+            text += `  المبلغ المستلم: ${totalReceived.toFixed(3)} د.ك\n`;
+            text += `  المبلغ المتبقي: ${remaining.toFixed(3)} د.ك\n\n`;
+            text += `━━━━━━━━━━━━━━━━━━━━`;
+            
+            return text;
+        }
+        
+        // Quick share functions for floating button
+        function quickShareWhatsApp() {
+            const text = getQuickReportText();
+            const encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/?text=${encoded}`, '_blank');
+            toggleFab();
+        }
+        
+        function quickShareTelegram() {
+            const text = getQuickReportText();
+            const encoded = encodeURIComponent(text);
+            window.open(`https://t.me/share/url?text=${encoded}`, '_blank');
+            toggleFab();
+        }
+        
+        function quickCopy() {
+            const text = getQuickReportText();
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ تقرير اليوم');
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('تم نسخ تقرير اليوم');
+            });
+            toggleFab();
+        }
+        
+        function quickDownload() {
+            const text = getQuickReportText();
+            const filename = `تقرير_اليوم_${new Date().toISOString().split('T')[0]}.txt`;
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('تم تنزيل تقرير اليوم');
+            toggleFab();
+        }
+        
+        // Update settings
+        function updateSettings() {
+            document.getElementById('totalPatients').textContent = patients.length;
+            document.getElementById('allRevenue').textContent = patients.reduce((sum, p) => sum + (p.totalAmount || 0), 0).toFixed(3);
+            document.getElementById('allReceived').textContent = patients.reduce((sum, p) => sum + (p.totalReceived || 0), 0).toFixed(3);
+        }
+        
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(patients, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `alsayer_patients_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('تم تصدير البيانات');
+        }
+        
+        // Import data
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported)) {
+                        if (confirm(`سيتم استيراد ${imported.length} مريض. هل تريد دمجها مع البيانات الحالية أم استبدالها؟\n\nاضغط OK للدمج\nاضغط Cancel للاستبدال`)) {
+                            patients = [...patients, ...imported];
+                        } else {
+                            patients = imported;
+                        }
+                        savePatients();
+                        updateSettings();
+                        showToast('تم استيراد البيانات بنجاح');
+                    }
+                } catch (err) {
+                    showToast('خطأ في قراءة الملف');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+        
+        // Clear all data
+        function clearAllData() {
+            if (confirm('هل أنت متأكد من حذف جميع البيانات؟\n\nهذا الإجراء لا يمكن التراجع عنه!')) {
+                if (confirm('تأكيد نهائي: سيتم حذف جميع بيانات المرضى نهائياً!')) {
+                    patients = [];
+                    savePatients();
+                    updateSettings();
+                    showToast('تم حذف جميع البيانات');
+                }
+            }
+        }
+        
+        // Close modal on outside click
+        document.getElementById('patientModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        // Initialize
+        updateSettings();
+    </script>
+</body>
+</html>

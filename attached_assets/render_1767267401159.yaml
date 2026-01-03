@@ -1,0 +1,30 @@
+# Render.com deployment configuration
+# Deploy to: https://render.com
+
+services:
+  - type: web
+    name: alsayer-patient-management
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_KEY
+        sync: false
+      - key: GOOGLE_SPREADSHEET_ID
+        sync: false
+
+databases:
+  - name: alsayer-db
+    plan: free
+    databaseName: alsayer_patients
+    user: alsayer

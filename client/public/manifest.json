@@ -1,0 +1,20 @@
+{
+  "name": "مركز اضواء الساير للعلاج الطبيعي والمساند الطبية",
+  "short_name": "أضواء الساير",
+  "description": "نظام إدارة المراجعين للعلاج الطبيعي والمساند الطبية",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "orientation": "portrait-primary",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
